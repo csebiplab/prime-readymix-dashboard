@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from 'next/dynamic';
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-})
+
+const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
+
 
 const modules = {
   toolbar: [
@@ -28,7 +28,7 @@ import "./BlogContentEditor.css";
 export default function BlogContentEditor({ inputValue, handleInputChange }) {
   return (
     <div className="__blog_content-text-editor">
-      <QuillNoSSRWrapper
+      <QuillEditor
         modules={modules}
         theme="snow"
         className="block lg:w-9/12 w-full"

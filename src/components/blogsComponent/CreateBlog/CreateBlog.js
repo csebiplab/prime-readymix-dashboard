@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// import BlogContentEditor from "./BlogContentEditor";
+import BlogContentEditor from "./BlogContentEditor";
 import { toast } from "react-toastify";
 
 function CreateBlog({ id, data }) {
@@ -32,12 +32,12 @@ function CreateBlog({ id, data }) {
       [eventKey]: e.target.value,
     }));
   };
-  // const handleBlogContentEditor = (eventKey, e) => {
-  //   setInputValue((prevInputValue) => ({
-  //     ...prevInputValue,
-  //     [eventKey]: e,
-  //   }));
-  // };
+  const handleBlogContentEditor = (eventKey, e) => {
+    setInputValue((prevInputValue) => ({
+      ...prevInputValue,
+      [eventKey]: e,
+    }));
+  };
   const handleSubmit = async () => {
     if (id) {
       let { title, description, keywords, content } = inputValue;
@@ -151,10 +151,10 @@ function CreateBlog({ id, data }) {
             </div>
           </div>
           <div className="blogContentEditor">
-            {/* <BlogContentEditor
+            <BlogContentEditor
               inputValue={inputValue}
               handleInputChange={handleBlogContentEditor}
-            /> */}
+            />
           </div>
         </div>
         <button
