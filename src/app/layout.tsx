@@ -26,10 +26,9 @@ export default function RootLayout({
       <body className={ubuntu.className}>
         <ThemeProvider attribute="class" disableTransitionOnChange>
           {children}
+          <ToastContainer position="top-center" />
         </ThemeProvider>
-
         <Analytics />
-        <ToastContainer position="top-center" />
       </body>
     </html>
   );

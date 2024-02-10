@@ -1,8 +1,8 @@
 import DashboardHeader from "@/components/dashboard-header";
 import Nav from "@/components/nav";
 import DashboardShell from "@/components/shell";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 export default async function DashboardLayout({
   children,
 }: {
@@ -23,7 +23,7 @@ export default async function DashboardLayout({
           {children}
         </DashboardShell>
       </main>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

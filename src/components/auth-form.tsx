@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -11,11 +12,12 @@ const providers: { CREDENTIALS: string } = {
 export default function AuthForm() {
   const [isLoginError, setIsLoginError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL;
 
   // this is callback url after login
-  const callbackUrl = `${baseAPIUrl}/dashboard`;
+  // const callbackUrl = `${baseAPIUrl}/dashboard`;
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -42,6 +44,10 @@ export default function AuthForm() {
     }
 
     setIsLoading(false);
+
+    if (res.ok && res?.error == null) {
+      router.push("/dashboard");
+    }
   };
 
   return (
