@@ -23,8 +23,40 @@ export default function AuthForm() {
     setIsLoading(false);
   };
 
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    const userName = event.target.username.value;
+    const password = event.target.password.value;
+    console.log(userName, password);
+  };
+
   return (
-    <Button
+    <>
+      <div className="w-5/3 bg-white p-10">
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-6">
+            <input
+              type="text"
+              placeholder="username"
+              name="username"
+              required
+            />
+            <input
+              type="password"
+              placeholder="password"
+              name="password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="bg-blue-700 text-white mt-6 px-2">
+            Login
+          </button>
+        </form>
+      </div>
+
+      {/* <Button
       className="flex flex-row gap-2"
       onClick={() => login(socialLoginProviders.GITHUB)}
     >
@@ -34,6 +66,7 @@ export default function AuthForm() {
         <GitHubLogoIcon width={20} height={20} />
       )}
       Sign in with GitHub
-    </Button>
+    </Button> */}
+    </>
   );
 }
