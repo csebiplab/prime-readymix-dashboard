@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import { getCapitalLettersOfName } from "@/lib/utils";
+import Link from "next/link";
 
 interface UserAccountNavProps {
   user: Pick<User, "name" | "image" | "email">;
@@ -30,8 +31,9 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <div className="text-md p-2 flex flex-col">
-          {user.name && <h3 className="font-medium">{user.name}</h3>}
-          {user.email && <p className="text-sm text-gray-1">{user.email}</p>}
+          <Link href="/dashboard/profile">
+            {user.name && getCapitalLettersOfName(user.name)}
+          </Link>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem
