@@ -59,3 +59,8 @@ Licensed under the [MIT license](https://github.com/themanafov/nextjs-dashboard-
 # next.js-app-router-template
 # next.js-app-router-template
 # next.js-app-router-template
+
+
+# Initial Admin Credentials
+uesrname: new user
+password: password
