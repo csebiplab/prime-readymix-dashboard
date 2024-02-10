@@ -1,21 +1,64 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const MyProfile = ({ user }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
 
-    const userName = event.target.newUsername.value;
-    const password = event.target.currentPassword.value;
+    const currentUserName = user?.name;
+    const newUserName = event.target.newUsername.value;
+    const currentPassword = event.target.currentPassword.value;
     const newPassword = event.target.newPassword.value;
-    console.log(userName, password, newPassword);
 
-    setIsLoading(false);
+    try {
+      const response = await fetch("/api/admin", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentUserName,
+          newUserName,
+          currentPassword,
+          newPassword,
+        }),
+      });
+
+      if (!response.ok) {
+        // Handle error response
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+
+      // If successful response
+      const data = await response.json();
+
+      // After update the profile signout the admin
+      await signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_API_URL}` });
+
+      // After
+      // const res = await signIn(providers.CREDENTIALS, {
+      //   username: userName,
+      //   password: password,
+      //   redirect: false,
+      //   // callbackUrl: callbackUrl,
+      // });
+
+      toast.success(data?.message);
+      setIsLoading(false);
+      setIsUpdating(false);
+    } catch (error) {
+      // Handle fetch error
+      console.error("Error:", error.message);
+      setIsLoading(false);
+    }
   };
 
   return (

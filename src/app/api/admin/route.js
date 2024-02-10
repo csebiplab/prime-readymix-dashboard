@@ -2,8 +2,9 @@ import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 import connectMongoDB from "../../../lib/mongodb";
 import Admin from "@/models/admin";
+import mongoose from "mongoose";
 
-
+// Temp api for create one time admin profile
 // export async function POST(request) {
 //     try {
 //         // Parse the incoming JSON data containing username and password
@@ -41,49 +42,75 @@ import Admin from "@/models/admin";
 //     }
 // }
 
+// Update admin profile
 
-export async function POST(request) {
+
+export async function PUT(request) {
+    // Connect to MongoDB
+    await connectMongoDB();
+
+    // Start Mongoose session
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        // Parse the incoming JSON data containing username and password
-        const { username, password } = await request.json();
-        // console.log(username, password)
+        const { currentUserName, newUserName, currentPassword, newPassword } = await request.json();
 
-        // Connect to MongoDB
-        await connectMongoDB();
-
-        // Find the admin by username
-        const admin = await Admin.findOne({ username });
+        // Find the admin by currentUserName
+        const admin = await Admin.findOne({ username: currentUserName }).session(session);
 
         // If admin is not found, return an error
         if (!admin) {
             return NextResponse.json(
-                { error: "Invalid username or password" },
-                { status: 401 } // Unauthorized status code
+                { error: "Invalid username" },
+                { status: 401 }
             );
         }
 
-        // Compare the provided password with the hashed password stored in the database
-        const passwordMatch = await bcrypt.compare(password, admin.password);
+        // Compare the provided currentPassword with the hashed password stored in the database
+        const passwordMatch = await bcrypt.compare(currentPassword, admin.password);
 
         // If passwords don't match, return an error
         if (!passwordMatch) {
             return NextResponse.json(
-                { error: "Invalid username or password" },
-                { status: 401 } // Unauthorized status code
+                { error: "Invalid password" },
+                { status: 401 }
             );
         }
 
-        // If authentication is successful, return a success message or any other data as needed
+        // Update admin's username if newUserName is provided
+        if (newUserName) {
+            admin.username = newUserName;
+        }
+
+        // Hash the new password if newPassword is provided
+        if (newPassword) {
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+            admin.password = hashedPassword;
+        }
+
+        // Save the updated admin
+        await admin.save();
+
+        // Commit the transaction
+        await session.commitTransaction();
+
         return NextResponse.json(
-            { message: "Login successful", admin },
-            { status: 200 } // OK status code
+            { message: "Updated successfully", admin: { userName: newUserName || currentUserName } },
+            { status: 200 }
         );
     } catch (error) {
-        // Handle any unexpected errors
-        console.error("Error during admin login:", error);
+        // Abort transaction if an error occurs
+        await session.abortTransaction();
+
+        console.error("Error during update profile:", error);
         return NextResponse.json(
             { error: "Internal Server Error" },
-            { status: 500 } // Internal Server Error status code
+            { status: 500 }
         );
+    } finally {
+        // End the session
+        session.endSession();
     }
 }
