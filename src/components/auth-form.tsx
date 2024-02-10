@@ -1,15 +1,15 @@
 "use client";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Button } from "./ui/button";
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
-import { Icons } from "./icons";
 
-const socialLoginProviders: { GITHUB: string } = {
-  GITHUB: "github",
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+const providers: { CREDENTIALS: string } = {
+  CREDENTIALS: "credentials",
 };
 
 export default function AuthForm() {
+  const [isLoginError, setIsLoginError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -17,18 +17,31 @@ export default function AuthForm() {
   // this is callback url after login
   const callbackUrl = `${baseAPIUrl}/dashboard`;
 
-  const login = async (provider: string) => {
-    setIsLoading(true);
-    await signIn(provider, { callbackUrl });
-    setIsLoading(false);
-  };
-
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setIsLoading(true);
 
     const userName = event.target.username.value;
     const password = event.target.password.value;
-    console.log(userName, password);
+    // console.log(userName, password);
+
+    const res = await signIn(providers.CREDENTIALS, {
+      username: userName,
+      password: password,
+      redirect: false,
+      // callbackUrl: callbackUrl,
+    });
+
+    setIsLoginError(res?.error);
+    if (res?.error) {
+      toast.error(res?.error);
+    }
+
+    if (!res?.error) {
+      toast.success("Login success");
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -44,29 +57,22 @@ export default function AuthForm() {
             />
             <input
               type="password"
-              placeholder="password"
+              placeholder="********"
               name="password"
               required
             />
           </div>
+          {isLoginError && <p className="text-red-600 mt-2">{isLoginError}</p>}
 
-          <button type="submit" className="bg-blue-700 text-white mt-6 px-2">
-            Login
+          <button
+            type="submit"
+            className={`bg-blue-700 text-white mt-6 px-2`}
+            disabled={isLoading ? true : false}
+          >
+            {isLoading ? "Logining..." : "Login"}
           </button>
         </form>
       </div>
-
-      {/* <Button
-      className="flex flex-row gap-2"
-      onClick={() => login(socialLoginProviders.GITHUB)}
-    >
-      {isLoading ? (
-        <Icons.spinner size={20} className="animate-spin" />
-      ) : (
-        <GitHubLogoIcon width={20} height={20} />
-      )}
-      Sign in with GitHub
-    </Button> */}
     </>
   );
 }

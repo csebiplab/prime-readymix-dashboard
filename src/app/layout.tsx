@@ -3,6 +3,8 @@ import ThemeProvider from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import Analytics from "@/components/analytics";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -27,6 +29,7 @@ export default function RootLayout({
         </ThemeProvider>
 
         <Analytics />
+        <ToastContainer position="top-center" />
       </body>
     </html>
   );

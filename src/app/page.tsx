@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export default async function Login() {
   const user = await getCurrentUser();
-  
+
+
   return (
     <div className="w-max min-h-screen mx-auto flex flex-col  gap-3 items-center justify-center">
       <div className="fixed right-0 bottom-0 p-4 flex flex-row  gap-1">

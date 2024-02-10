@@ -13,6 +13,8 @@ import {
 } from "@tremor/react";
 
 export default async function Home() {
+  const user = await getCurrentUser()
+
   return (
     <>
       <div className="flex lg:flex-row gap-4 flex-col px-5">
