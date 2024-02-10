@@ -17,7 +17,7 @@ This is a starter template using the following stack:
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Language - [TypeScript](https://www.typescriptlang.org)
 - Dashboard Components - [Tremor](https://www.tremor.so)
-- Auth - [NextAuth.js](https://next-auth.js.org)
+- Auth - [Credentails]- [NextAuth.js](https://next-auth.js.org)
 - Deployment - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
 
 ## About this project
