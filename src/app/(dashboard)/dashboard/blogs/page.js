@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import React from "react";
-import { HiPencilAlt } from "react-icons/hi";
 import BlogList from "../../../../components/blogsComponent/BlogList/BlogList";
 import useFetchMetaData from "@/hooks/useFetchMetaData";
 export default function page() {
