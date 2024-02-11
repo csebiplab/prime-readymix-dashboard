@@ -5,7 +5,7 @@ import blogContent from "../../../models/blogContentFile";
 export async function POST(request) {
   try {
     const { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = await request.json();
-    console.log({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content })
+    // console.log({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content })
     await connectMongoDB();
     await blogContent.create({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content });
     return NextResponse.json(
