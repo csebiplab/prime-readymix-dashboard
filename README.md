@@ -62,5 +62,5 @@ Licensed under the [MIT license](https://github.com/themanafov/nextjs-dashboard-
 
 
 # Initial Admin Credentials
-- uesrname: new user
-- password: password
+- uesrname: new new user
+- password: passwordpassword
