@@ -1,11 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
 const metaDataSchema = new Schema(
+
   {
-    title: String,
-    description: String,
-    keywords: String,
-    content: String,
+    blogTitle: String,
+    metaTitle: String,
+    metaDescription: String,
+    metaKeywords: String,
+    shortDescription: String,
+    content: String
   },
   {
     timestamps: true,

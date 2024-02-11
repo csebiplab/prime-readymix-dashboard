@@ -22,13 +22,19 @@ export default function BlogList({ allBlogList }) {
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Name
+                  Blog Title
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Keywords
+                  Meta Title
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Description
+                  Meta Description
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Meta keywords
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Short Description
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Content
@@ -48,11 +54,13 @@ export default function BlogList({ allBlogList }) {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {item?.title}
+                    {item?.blogTitle}
                   </th>
-                  <td className="px-6 py-4">{item?.keywords}</td>
-                  <td className="px-6 py-4">{item?.description}</td>
-                  <td className="px-6 py-4">{item?.content}</td>
+                  <td className="px-6 py-4">{item?.metaTitle}</td>
+                  <td className="px-6 py-4">{item?.metaDescription}</td>
+                  <td className="px-6 py-4">{item?.metaKeywords}</td>
+                  <td className="px-6 py-4">{item?.shortDescription}</td>
+                  <td className="px-6 py-4">{item?.content.length > 20 ? `${item?.content.substring(0, 20)}...` : item?.content}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       {" "}
