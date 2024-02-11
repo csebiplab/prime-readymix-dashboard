@@ -95,7 +95,7 @@ function CreateBlog({ id, data }) {
           <div className="sm:col-span-3">
             <label
               htmlFor="blogTitle"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Blog Title
             </label>
@@ -105,7 +105,7 @@ function CreateBlog({ id, data }) {
                 name="blogTitle"
                 id="blogTitle"
                 autoComplete="given-name"
-                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.blogTitle}
                 // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("blogTitle", e)}
@@ -115,7 +115,7 @@ function CreateBlog({ id, data }) {
           <div className="sm:col-span-3">
             <label
               htmlFor="metaTitle"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Meta Title
             </label>
@@ -125,7 +125,7 @@ function CreateBlog({ id, data }) {
                 name="metaTitle"
                 id="metaTitle"
                 autoComplete="given-name"
-                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaTitle}
                 // onChange={handlemetaTitleChange}
                 onChange={(e) => handleInputChange("metaTitle", e)}
@@ -135,7 +135,7 @@ function CreateBlog({ id, data }) {
           <div className="sm:col-span-3">
             <label
               htmlFor="metaDescription"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Meta Description
             </label>
@@ -145,7 +145,7 @@ function CreateBlog({ id, data }) {
                 name="metaDescription"
                 id="metaDescription"
                 autoComplete="given-name"
-                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaDescription}
                 // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("metaDescription", e)}
@@ -155,7 +155,7 @@ function CreateBlog({ id, data }) {
           <div className="sm:col-span-3">
             <label
               htmlFor="metaKeywords"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Meta Keywords
             </label>
@@ -165,7 +165,7 @@ function CreateBlog({ id, data }) {
                 name="metaKeywords"
                 id="metaKeywords"
                 autoComplete="off"
-                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaKeywords}
                 // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("metaKeywords", e)}
@@ -176,7 +176,7 @@ function CreateBlog({ id, data }) {
           <div className="sm:col-span-3">
             <label
               htmlFor="shortDescription"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
             >
               Short Description
             </label>
@@ -187,7 +187,7 @@ function CreateBlog({ id, data }) {
                 rows="4"
                 id="shortDescription"
                 autoComplete="off"
-                className="block lg:w-4/6 w-full px-5  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block lg:w-4/6 w-full px-5  rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue?.shortDescription}
                 // onChange={handleDescriptionChange}
                 onChange={(e) => handleInputChange("shortDescription", e)}

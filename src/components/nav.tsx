@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { dashboardConfig } from "@/config/dashboard";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import { Icons } from "./icons";
 import { Icon } from "@iconify/react";
@@ -46,7 +45,7 @@ const MenuItem = ({ item }) => {
           <button
             onClick={toggleSubMenu}
             className={`flex flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
-              pathname.includes(item.href) ? "bg-zinc-100" : ""
+              pathname.includes(item.href) ? "bg-zinc-100 text-gray-900" : ""
             }`}
           >
             <div className="flex flex-row space-x-4 items-center">
