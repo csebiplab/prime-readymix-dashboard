@@ -4,6 +4,7 @@ import blogContent from "../../../../models/blogContentFile";
 
 export async function PUT(request, { params }) {
   const { id } = params;
+  // const {metaTitle}
   const { title, description, keywords, content } = await request.json();
   await connectMongoDB();
   const blogList = await blogContent.findByIdAndUpdate(id, {
