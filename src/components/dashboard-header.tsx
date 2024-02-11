@@ -4,6 +4,7 @@ import UserAccountNav from "./user-account-nav";
 import getCurrentUser from "@/lib/session";
 import MobileNav from "./mobile-nav";
 import ThemeToggle from "./theme-toggle";
+import DynamicDashboardHeaderTitle from "./ui/dynamic-dashboard-header-title";
 
 interface DashboardHeaderProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -11,10 +12,11 @@ interface DashboardHeaderProps extends HTMLAttributes<HTMLDivElement> {
 
 export default async function DashboardHeader({
   className,
-  title,
   ...props
 }: DashboardHeaderProps) {
   const user = await getCurrentUser();
+
+  // const title = ""
 
   return (
     <header
@@ -24,7 +26,8 @@ export default async function DashboardHeader({
       )}
       {...props}
     >
-      <h1 className="text-xl font-medium flex-1">{title}</h1>
+      <DynamicDashboardHeaderTitle />
+      {/* <h1 className="text-xl font-medium flex-1">{title}</h1> */}
       <ThemeToggle className="hidden max-md:flex" />
       <MobileNav />
       <UserAccountNav

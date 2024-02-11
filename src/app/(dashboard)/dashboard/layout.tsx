@@ -19,7 +19,7 @@ export default async function DashboardLayout({
       <main className="flex-1 bg-gray-3 border border-gray-2  rounded-lg  max-h-screen overflow-auto pb-5 ">
         {/* <h3>dd</h3> */}
         <DashboardShell>
-          <DashboardHeader title="Dynamic" />
+          <DashboardHeader title={""} />
           {children}
         </DashboardShell>
       </main>
