@@ -12,8 +12,8 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Dashboard",
-  description: "Next.js Dashboard Template",
+  title: "Prime Ready Mix Dashboard",
+  description: "Prime Ready Mix Dashboard",
 };
 
 export default function RootLayout({
