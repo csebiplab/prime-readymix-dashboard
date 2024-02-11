@@ -4,7 +4,7 @@ import React from "react";
 import { HiPencilAlt } from "react-icons/hi";
 import RemoveBlogBtnComponent from "../RemoveBlogBtnComponent";
 export default function BlogList({ allBlogList }) {
-  console.log(allBlogList)
+  // console.log(allBlogList)
   return (
     <div>
       <div className="px-5">
