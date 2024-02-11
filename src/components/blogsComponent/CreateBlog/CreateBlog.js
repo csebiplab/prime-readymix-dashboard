@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 function CreateBlog({ id, data }) {
   const router = useRouter();
   const [inputValue, setInputValue] = useState({
-    title: "",
-    description: "",
-    keywords: "",
+    blogTitle: "",
+    metaTitle: "",
+    metaDescription: "",
+    metaKeywords: "",
+    shortDescription: "",
     content: "",
   });
 
@@ -19,9 +21,11 @@ function CreateBlog({ id, data }) {
     if (data) {
       const { blogDetailsData } = data;
       setInputValue({
-        title: blogDetailsData?.title,
-        keywords: blogDetailsData?.keywords,
-        description: blogDetailsData?.description,
+        blogTitle: blogDetailsData?.blogTitle,
+        metaTitle: blogDetailsData?.metaTitle,
+        metaDescription: blogDetailsData?.metaDescription,
+        metaKeywords: blogDetailsData?.metaKeywords,
+        shortDescription: blogDetailsData?.shortDescription,
         content: blogDetailsData?.content,
       });
     }
@@ -40,14 +44,14 @@ function CreateBlog({ id, data }) {
   };
   const handleSubmit = async () => {
     if (id) {
-      let { title, description, keywords, content } = inputValue;
+      let { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = inputValue;
       try {
         const res = await fetch(`${baseAPIUrl}/api/blogContent/${id}`, {
           method: "PUT",
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ title, description, keywords, content }),
+          body: JSON.stringify({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content }),
         });
         if (!res.ok) {
           toast(`Failed to update blog data`);
@@ -61,14 +65,14 @@ function CreateBlog({ id, data }) {
         console.log(error);
       }
     } else {
-      let { title, description, keywords, content } = inputValue;
+      let { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = inputValue;
       try {
         const res = await fetch(`${baseAPIUrl}/api/blogContent`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ title, description, keywords, content }),
+          body: JSON.stringify({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content }),
         });
 
         if (res.ok) {
@@ -90,48 +94,88 @@ function CreateBlog({ id, data }) {
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-14">
           <div className="sm:col-span-3">
             <label
-              htmlFor="first-name"
+              htmlFor="blogTitle"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Title
+              Blog Title
             </label>
             <div className="mt-2">
               <input
                 type="text"
-                name="title"
-                id="title"
+                name="blogTitle"
+                id="blogTitle"
                 autoComplete="given-name"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={inputValue.title}
+                value={inputValue.blogTitle}
                 // onChange={handleTitleChange}
-                onChange={(e) => handleInputChange("title", e)}
+                onChange={(e) => handleInputChange("blogTitle", e)}
               />
             </div>
           </div>
           <div className="sm:col-span-3">
             <label
-              htmlFor="first-name"
+              htmlFor="metaTitle"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Keywords
+              Meta Title
             </label>
             <div className="mt-2">
               <input
                 type="text"
-                name="keywords"
-                id="keywords"
+                name="metaTitle"
+                id="metaTitle"
                 autoComplete="given-name"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={inputValue.keywords}
+                value={inputValue.metaTitle}
+                // onChange={handlemetaTitleChange}
+                onChange={(e) => handleInputChange("metaTitle", e)}
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="metaDescription"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Meta Description
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="metaDescription"
+                id="metaDescription"
+                autoComplete="given-name"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                value={inputValue.metaDescription}
                 // onChange={handleTitleChange}
-                onChange={(e) => handleInputChange("keywords", e)}
+                onChange={(e) => handleInputChange("metaDescription", e)}
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="metaKeywords"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Meta Keywords
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="metaKeywords"
+                id="metaKeywords"
+                autoComplete="off"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                value={inputValue.metaKeywords}
+                // onChange={handleTitleChange}
+                onChange={(e) => handleInputChange("metaKeywords", e)}
               />
             </div>
           </div>
 
           <div className="sm:col-span-3">
             <label
-              htmlFor="last-name"
+              htmlFor="shortDescription"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Short Description
@@ -139,14 +183,14 @@ function CreateBlog({ id, data }) {
             <div className="mt-2">
               <textarea
                 type="text"
-                name="description"
+                name="shortDescription"
                 rows="4"
-                id="description"
-                autoComplete="family-name"
+                id="shortDescription"
+                autoComplete="off"
                 className="block lg:w-4/6 w-full px-5  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={inputValue?.description}
+                value={inputValue?.shortDescription}
                 // onChange={handleDescriptionChange}
-                onChange={(e) => handleInputChange("description", e)}
+                onChange={(e) => handleInputChange("shortDescription", e)}
               />
             </div>
           </div>
