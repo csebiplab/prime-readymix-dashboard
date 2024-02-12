@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
 
   const metaTitle = slug;
 
-  console.log("got metatitle", metaTitle)
+  // console.log("got metatitle", metaTitle)
 
 
   await connectMongoDB();
