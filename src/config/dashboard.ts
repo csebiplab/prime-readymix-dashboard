@@ -76,6 +76,11 @@ export const dashboardConfig: DashboardConfig = {
           href: "/dashboard/siteMap",
           icon: "dessert",
         },
+        {
+          title: "RobotTXT",
+          href: "/dashboard/robottxt",
+          icon: "dessert",
+        },
       ],
     },
     {
