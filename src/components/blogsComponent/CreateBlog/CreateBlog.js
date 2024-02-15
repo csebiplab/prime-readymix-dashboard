@@ -9,6 +9,7 @@ function CreateBlog({ id, data }) {
   const [inputValue, setInputValue] = useState({
     blogTitle: "",
     metaTitle: "",
+    customLink: "",
     metaDescription: "",
     metaKeywords: "",
     shortDescription: "",
@@ -23,6 +24,7 @@ function CreateBlog({ id, data }) {
       setInputValue({
         blogTitle: blogDetailsData?.blogTitle,
         metaTitle: blogDetailsData?.metaTitle,
+        customLink: blogDetailsData?.customLink,
         metaDescription: blogDetailsData?.metaDescription,
         metaKeywords: blogDetailsData?.metaKeywords,
         shortDescription: blogDetailsData?.shortDescription,
@@ -44,14 +46,14 @@ function CreateBlog({ id, data }) {
   };
   const handleSubmit = async () => {
     if (id) {
-      let { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = inputValue;
+      let { blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content } = inputValue;
       try {
         const res = await fetch(`${baseAPIUrl}/api/blogContent/${id}`, {
           method: "PUT",
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content }),
+          body: JSON.stringify({ blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content }),
         });
         if (!res.ok) {
           toast(`Failed to update blog data`);
@@ -65,14 +67,14 @@ function CreateBlog({ id, data }) {
         console.log(error);
       }
     } else {
-      let { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = inputValue;
+      let { blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content } = inputValue;
       try {
         const res = await fetch(`${baseAPIUrl}/api/blogContent`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content }),
+          body: JSON.stringify({ blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content }),
         });
 
         if (res.ok) {
@@ -107,7 +109,6 @@ function CreateBlog({ id, data }) {
                 autoComplete="given-name"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.blogTitle}
-                // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("blogTitle", e)}
               />
             </div>
@@ -127,8 +128,26 @@ function CreateBlog({ id, data }) {
                 autoComplete="given-name"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaTitle}
-                // onChange={handlemetaTitleChange}
                 onChange={(e) => handleInputChange("metaTitle", e)}
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="customLink"
+              className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+            >
+              Custom Link
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="customLink"
+                id="customLink"
+                autoComplete="given-name"
+                className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                value={inputValue.customLink}
+                onChange={(e) => handleInputChange("customLink", e)}
               />
             </div>
           </div>
@@ -147,7 +166,6 @@ function CreateBlog({ id, data }) {
                 autoComplete="given-name"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaDescription}
-                // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("metaDescription", e)}
               />
             </div>
@@ -167,7 +185,6 @@ function CreateBlog({ id, data }) {
                 autoComplete="off"
                 className="block lg:w-4/6 w-full px-5 rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue.metaKeywords}
-                // onChange={handleTitleChange}
                 onChange={(e) => handleInputChange("metaKeywords", e)}
               />
             </div>
@@ -189,7 +206,6 @@ function CreateBlog({ id, data }) {
                 autoComplete="off"
                 className="block lg:w-4/6 w-full px-5  rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={inputValue?.shortDescription}
-                // onChange={handleDescriptionChange}
                 onChange={(e) => handleInputChange("shortDescription", e)}
               />
             </div>
