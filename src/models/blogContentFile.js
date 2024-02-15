@@ -5,6 +5,7 @@ const metaDataSchema = new Schema(
   {
     blogTitle: String,
     metaTitle: String,
+    customLink: String,
     metaDescription: String,
     metaKeywords: String,
     shortDescription: String,

@@ -4,12 +4,13 @@ import blogContent from "../../../../models/blogContentFile";
 
 export async function PUT(request, { params }) {
   const { slug } = params;
-  const { blogTitle, metaTitle, metaDescription, metaKeywords, shortDescription, content } = await request.json();
+  const { blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content } = await request.json();
   const id = slug;
   await connectMongoDB();
   const blogList = await blogContent.findByIdAndUpdate(id, {
     blogTitle,
     metaTitle,
+    customLink,
     metaDescription,
     metaKeywords,
     shortDescription,
@@ -22,12 +23,12 @@ export async function GET(request, { params }) {
   const { slug } = params;
   // const {metaTitle}
 
-  const metaTitle = slug;
+  const customLink = slug;
 
   // console.log("got metatitle", metaTitle)
 
 
   await connectMongoDB();
-  const blogDetailsData = await blogContent.findOne({ metaTitle });
+  const blogDetailsData = await blogContent.findOne({ customLink });
   return NextResponse.json({ blogDetailsData }, { status: 200 });
 }
