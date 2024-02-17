@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { HiPencilAlt } from "react-icons/hi";
 import RemoveBlogBtnComponent from "../RemoveBlogBtnComponent";
+import convertSubStr from "@/helpers/subStr";
 export default function BlogList({ allBlogList }) {
   // console.log(allBlogList)
   return (
@@ -28,6 +29,9 @@ export default function BlogList({ allBlogList }) {
                   Meta Title
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Custom Link
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Meta Description
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -45,33 +49,36 @@ export default function BlogList({ allBlogList }) {
               </tr>
             </thead>
             <tbody>
-              {allBlogList?.blogContentData?.map((item) => (
-                <tr
-                  key={item?._id}
-                  className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium"
+              {allBlogList?.blogContentData?.map((item) => {
+                return <>
+                  <tr
+                    key={item?._id}
+                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
-                    {item?.blogTitle}
-                  </th>
-                  <td className="px-6 py-4">{item?.metaTitle.length > 20 ? `${item?.metaTitle.substring(0, 20)}...` : item?.metaTitle}</td>
-                  <td className="px-6 py-4">{item?.metaDescription.length > 20 ? `${item?.metaDescription.substring(0, 20)}...` : item?.metaDescription}</td>
-                  <td className="px-6 py-4">{item?.metaKeywords.length > 20 ? `${item?.metaKeywords.substring(0, 20)}...` : item?.metaKeywords}</td>
-                  <td className="px-6 py-4">{item?.shortDescription.length > 20 ? `${item?.shortDescription.substring(0, 20)}...` : item?.shortDescription}</td>
-                  <td className="px-6 py-4">{item?.content.length > 20 ? `${item?.content.substring(0, 20)}...` : item?.content}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2">
-                      {" "}
-                      <Link href={`/dashboard/blogs/editBlog/${item?._id}`}>
-                        <HiPencilAlt size={24} />
-                      </Link>
-                      <RemoveBlogBtnComponent id={item._id} />
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium"
+                    >
+                      {item?.blogTitle}
+                    </th>
+                    <td className="px-6 py-4">{convertSubStr(item?.metaTitle)}</td>
+                    <td className="px-6 py-4">{item?.customLink}</td>
+                    <td className="px-6 py-4">{convertSubStr(item?.metaDescription)}</td>
+                    <td className="px-6 py-4">{convertSubStr(item?.metaKeywords)}</td>
+                    <td className="px-6 py-4">{convertSubStr(item?.shortDescription)}</td>
+                    <td className="px-6 py-4">{convertSubStr(item?.content)}</td>
+                    <td className="px-6 py-4">
+                      <div className="flex gap-2">
+                        {" "}
+                        <Link href={`/dashboard/blogs/editBlog/${item?._id}`}>
+                          <HiPencilAlt size={24} />
+                        </Link>
+                        <RemoveBlogBtnComponent id={item._id} />
+                      </div>
+                    </td>
+                  </tr>
+                </>
+              })}
             </tbody>
           </table>
         </div>

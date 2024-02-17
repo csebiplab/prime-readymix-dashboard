@@ -2,17 +2,19 @@ import connectMongoDB from "../../../../lib/mongodb";
 import { NextResponse } from "next/server";
 import blogContent from "../../../../models/blogContentFile";
 import { ObjectId } from 'mongodb';
+import convertToLink from "@/helpers/trimSpace";
 
 
 export async function PUT(request, { params }) {
   const { slug } = params;
   const { blogTitle, metaTitle, customLink, metaDescription, metaKeywords, shortDescription, content } = await request.json();
   const id = slug;
+  const convertLink = convertToLink(customLink)
   await connectMongoDB();
   const blogList = await blogContent.findByIdAndUpdate(id, {
     blogTitle,
     metaTitle,
-    customLink,
+    customLink: convertLink,
     metaDescription,
     metaKeywords,
     shortDescription,
