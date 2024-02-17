@@ -56,10 +56,10 @@ export default function BlogList({ allBlogList }) {
                   >
                     {item?.blogTitle}
                   </th>
-                  <td className="px-6 py-4">{item?.metaTitle}</td>
-                  <td className="px-6 py-4">{item?.metaDescription}</td>
-                  <td className="px-6 py-4">{item?.metaKeywords}</td>
-                  <td className="px-6 py-4">{item?.shortDescription}</td>
+                  <td className="px-6 py-4">{item?.metaTitle.length > 20 ? `${item?.metaTitle.substring(0, 20)}...` : item?.metaTitle}</td>
+                  <td className="px-6 py-4">{item?.metaDescription.length > 20 ? `${item?.metaDescription.substring(0, 20)}...` : item?.metaDescription}</td>
+                  <td className="px-6 py-4">{item?.metaKeywords.length > 20 ? `${item?.metaKeywords.substring(0, 20)}...` : item?.metaKeywords}</td>
+                  <td className="px-6 py-4">{item?.shortDescription.length > 20 ? `${item?.shortDescription.substring(0, 20)}...` : item?.shortDescription}</td>
                   <td className="px-6 py-4">{item?.content.length > 20 ? `${item?.content.substring(0, 20)}...` : item?.content}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
