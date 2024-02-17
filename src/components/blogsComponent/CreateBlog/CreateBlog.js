@@ -16,6 +16,8 @@ function CreateBlog({ id, data }) {
     content: "",
   });
 
+  // console.log(id, data)
+
   const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
