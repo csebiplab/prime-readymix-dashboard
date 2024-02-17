@@ -5,3 +5,7 @@
   border: 1px solid #ccc;
   min-height: 100px;
 }
+
+.editor-height {
+  height: 60vh !important;
+}

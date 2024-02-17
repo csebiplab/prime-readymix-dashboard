@@ -31,7 +31,7 @@ export default function BlogContentEditor({ inputValue, handleInputChange }) {
       <QuillEditor
         modules={modules}
         theme="snow"
-        className="block lg:w-9/12 w-full"
+        className="block lg:w-9/12 w-full editor-height"
         value={inputValue?.content}
         onChange={(e) => handleInputChange("content", e)}
         placeholder="Content goes here..."
